@@ -1,8 +1,7 @@
 %define base_name	xml-light
 %define name		ocaml-%{base_name}
 %define version		2.2
-%define release		%mkrel 7
-%define ocaml_sitelib %(if [ -x /usr/bin/ocamlc ]; then ocamlc -where;fi)/site-lib
+%define release		%mkrel 8
 
 Name:		%{name}
 Version:	%{version}
@@ -26,10 +25,11 @@ hence it does not require additional C library.
 %package devel
 Summary:	Development files for %{name}
 Group:		Development/Other
+Requires:   %{name} = %{version}-%{release}
 
 %description devel
 This package contains the development files needed to build applications
-using%{name}.
+using %{name}.
 
 %prep
 %setup -q -n %{base_name}
@@ -48,9 +48,14 @@ make install INSTALLDIR=%{buildroot}%{ocaml_sitelib}/xml-light
 %clean
 rm -rf %{buildroot}
 
+%files
+%defattr(-,root,root)
+%doc README
+%dir %{ocaml_sitelib}/xml-light
+%{ocaml_sitelib}/xml-light/*.cmi
+
 %files devel
 %defattr(-,root,root)
 %doc README
-%{ocaml_sitelib}/xml-light
-
-
+%{ocaml_sitelib}/xml-light/*
+%exclude %{ocaml_sitelib}/xml-light/*.cmi

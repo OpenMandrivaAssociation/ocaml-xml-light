@@ -1,7 +1,7 @@
 %define base_name	xml-light
 %define name		ocaml-%{base_name}
 %define version		2.2
-%define release		%mkrel 8
+%define release		%mkrel 9
 
 Name:		%{name}
 Version:	%{version}
@@ -56,6 +56,5 @@ rm -rf %{buildroot}
 
 %files devel
 %defattr(-,root,root)
-%doc README
 %{ocaml_sitelib}/xml-light/*
 %exclude %{ocaml_sitelib}/xml-light/*.cmi

@@ -13,6 +13,7 @@ Patch:      %{name}-2.2-fix-build.patch
 License:	LGPL
 Group:		Development/Other
 BuildRequires:	ocaml
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 Xml-Light is a minimal XML parser & printer for OCaml. 

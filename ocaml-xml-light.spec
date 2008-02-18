@@ -6,7 +6,7 @@
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-Summary:	Xml-Light is a minimal XML parser & printer for OCaml
+Summary:	Minimal XML parser & printer for OCaml
 URL:		http://tech.motion-twin.com/xmllight.html
 Source: 	http://tech.motion-twin.com/zip/%{base_name}.tar.bz2
 Patch:      %{name}-2.2-fix-build.patch

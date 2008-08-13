@@ -1,7 +1,7 @@
 %define base_name	xml-light
 %define name		ocaml-%{base_name}
 %define version		2.2
-%define release		%mkrel 13
+%define release		%mkrel 14
 
 Name:		%{name}
 Version:	%{version}
@@ -44,6 +44,13 @@ make
 rm -rf %{buildroot}
 install -d %{buildroot}%{ocaml_sitelib}/xml-light
 make install INSTALLDIR=%{buildroot}%{ocaml_sitelib}/xml-light
+
+cat > %{buildroot}%{ocaml_sitelib}/xml-light/META <<EOF
+version = "%{version}"
+description = "Minimal XML parser & printer for OCaml"
+archive(byte) = "xml-light.cma"
+archive(native) = "xml-light.cma.cmxa"
+EOF
 
 %clean
 rm -rf %{buildroot}

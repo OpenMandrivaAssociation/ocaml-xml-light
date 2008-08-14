@@ -1,7 +1,7 @@
 %define base_name	xml-light
 %define name		ocaml-%{base_name}
 %define version		2.2
-%define release		%mkrel 14
+%define release		%mkrel 15
 
 Name:		%{name}
 Version:	%{version}
@@ -49,7 +49,7 @@ cat > %{buildroot}%{ocaml_sitelib}/xml-light/META <<EOF
 version = "%{version}"
 description = "Minimal XML parser & printer for OCaml"
 archive(byte) = "xml-light.cma"
-archive(native) = "xml-light.cma.cmxa"
+archive(native) = "xml-light.cmxa"
 EOF
 
 %clean

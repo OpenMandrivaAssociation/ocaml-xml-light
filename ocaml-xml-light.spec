@@ -1,7 +1,7 @@
 %define base_name	xml-light
 %define name		ocaml-%{base_name}
 %define version		2.2
-%define release		%mkrel 15
+%define release		%mkrel 16
 
 Name:		%{name}
 Version:	%{version}
@@ -42,10 +42,10 @@ make
 
 %install
 rm -rf %{buildroot}
-install -d %{buildroot}%{ocaml_sitelib}/xml-light
-make install INSTALLDIR=%{buildroot}%{ocaml_sitelib}/xml-light
+install -d %{buildroot}%{_libdir}/ocaml/xml-light
+make install INSTALLDIR=%{buildroot}%{_libdir}/ocaml/xml-light
 
-cat > %{buildroot}%{ocaml_sitelib}/xml-light/META <<EOF
+cat > %{buildroot}%{_libdir}/ocaml/xml-light/META <<EOF
 version = "%{version}"
 description = "Minimal XML parser & printer for OCaml"
 archive(byte) = "xml-light.cma"
@@ -58,10 +58,14 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %doc README
-%dir %{ocaml_sitelib}/xml-light
-%{ocaml_sitelib}/xml-light/*.cmi
+%dir %{_libdir}/ocaml/xml-light
+%{_libdir}/ocaml/xml-light/*.cmi
+%{_libdir}/ocaml/xml-light/*.cma
+%{_libdir}/ocaml/xml-light/META
 
 %files devel
 %defattr(-,root,root)
-%{ocaml_sitelib}/xml-light/*
-%exclude %{ocaml_sitelib}/xml-light/*.cmi
+%{_libdir}/ocaml/xml-light/*.a
+%{_libdir}/ocaml/xml-light/*.cmx
+%{_libdir}/ocaml/xml-light/*.cmxa
+%{_libdir}/ocaml/xml-light/*.mli

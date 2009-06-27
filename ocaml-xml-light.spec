@@ -1,7 +1,7 @@
 %define base_name	xml-light
 %define name		ocaml-%{base_name}
 %define version		2.2
-%define release		%mkrel 16
+%define release		%mkrel 17
 
 Name:		%{name}
 Version:	%{version}

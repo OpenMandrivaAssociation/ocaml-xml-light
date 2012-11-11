@@ -1,0 +1,13 @@
+Les sous-répertoires xml-light/doc et xml-light.fix/doc sont identiques.
+diff -Nau xml-light/Makefile xml-light.fix/Makefile
+--- xml-light/Makefile	2003-10-12 11:16:12.000000000 +0200
++++ xml-light.fix/Makefile	2007-01-25 13:26:43.000000000 +0100
+@@ -44,6 +44,8 @@
+ 
+ dtd.cmi: xml.cmi
+ 
++xml_parser.cmi: xml_parser.mli
++
+ xml.cmi: 
+ 
+ xmlParser.cmi: dtd.cmi xml.cmi

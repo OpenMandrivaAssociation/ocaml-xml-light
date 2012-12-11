@@ -69,3 +69,53 @@ rm -rf %{buildroot}
 %{_libdir}/ocaml/xml-light/*.cmx
 %{_libdir}/ocaml/xml-light/*.cmxa
 %{_libdir}/ocaml/xml-light/*.mli
+
+
+%changelog
+* Wed May 09 2012 Crispin Boylan <crisb@mandriva.org> 2.2-18
++ Revision: 797737
+- Rebuild
+
+* Sat Jun 27 2009 Guillaume Rousse <guillomovitch@mandriva.org> 2.2-17mdv2011.0
++ Revision: 389827
+- rebuild
+
+* Wed Dec 24 2008 Guillaume Rousse <guillomovitch@mandriva.org> 2.2-16mdv2009.1
++ Revision: 318329
+- move non-devel files in main package
+- site-lib hierarchy doesn't exist anymore
+
+* Thu Aug 14 2008 Guillaume Rousse <guillomovitch@mandriva.org> 2.2-15mdv2009.0
++ Revision: 272173
+- fix META file
+
+* Wed Aug 13 2008 Guillaume Rousse <guillomovitch@mandriva.org> 2.2-14mdv2009.0
++ Revision: 271624
+- add META file
+
+* Wed Jul 30 2008 Thierry Vignaud <tv@mandriva.org> 2.2-13mdv2009.0
++ Revision: 254378
+- rebuild
+
+* Tue Mar 04 2008 Guillaume Rousse <guillomovitch@mandriva.org> 2.2-11mdv2008.1
++ Revision: 178371
+- rebuild
+
+* Mon Feb 18 2008 Thierry Vignaud <tv@mandriva.org> 2.2-10mdv2008.1
++ Revision: 171006
+- rebuild
+- fix "foobar is blabla" summary (=> "blabla") so that it looks nice in rpmdrake
+- kill re-definition of %%buildroot on Pixel's request
+
+  + Olivier Blin <blino@mandriva.org>
+    - restore BuildRoot
+
+* Sat Sep 01 2007 Guillaume Rousse <guillomovitch@mandriva.org> 2.2-9mdv2008.0
++ Revision: 77552
+- don't ship documentation twice
+
+* Sat Sep 01 2007 Guillaume Rousse <guillomovitch@mandriva.org> 2.2-8mdv2008.0
++ Revision: 77523
+- drop macro definition, now in rpm-mandriva-setup
+  ship .cmi file in non-devel subpackage
+

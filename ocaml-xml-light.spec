@@ -1,19 +1,16 @@
-%define base_name	xml-light
-%define name		ocaml-%{base_name}
-%define version		2.2
-%define release		18
+%define _enable_debug_packages %{nil}
+%define debug_package %{nil}
 
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
 Summary:	Minimal XML parser & printer for OCaml
-URL:		http://tech.motion-twin.com/xmllight.html
-Source: 	http://tech.motion-twin.com/zip/%{base_name}.tar.bz2
-Patch:      %{name}-2.2-fix-build.patch
-License:	LGPL
+Name:		ocaml-xml-light
+Version:	2.2
+Release:	19
+License:	LGPLv2.1+
 Group:		Development/Other
+Url:		http://tech.motion-twin.com/xmllight.html
+Source0:	http://tech.motion-twin.com/zip/xml-light.tar.bz2
+Patch0:		%{name}-2.2-fix-build.patch
 BuildRequires:	ocaml
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 Xml-Light is a minimal XML parser & printer for OCaml. 
@@ -22,18 +19,35 @@ work with it, and print it back to an XML document.
 It support also DTD parsing and checking, and is entirely written in OCaml, 
 hence it does not require additional C library.
 
+%files
+%doc README
+%dir %{_libdir}/ocaml/xml-light
+%{_libdir}/ocaml/xml-light/*.cmi
+%{_libdir}/ocaml/xml-light/*.cma
+%{_libdir}/ocaml/xml-light/META
+
+#----------------------------------------------------------------------------
+
 %package devel
 Summary:	Development files for %{name}
 Group:		Development/Other
-Requires:   %{name} = %{version}-%{release}
+Requires:	%{name} = %{EVRD}
 
 %description devel
 This package contains the development files needed to build applications
 using %{name}.
 
+%files devel
+%{_libdir}/ocaml/xml-light/*.a
+%{_libdir}/ocaml/xml-light/*.cmx
+%{_libdir}/ocaml/xml-light/*.cmxa
+%{_libdir}/ocaml/xml-light/*.mli
+
+#----------------------------------------------------------------------------
+
 %prep
-%setup -q -n %{base_name}
-%patch -p 1
+%setup -q -n xml-light
+%patch0 -p 1
 chmod 644 README *.mli
 perl -pi -e 's/\015$//' README
 
@@ -41,7 +55,6 @@ perl -pi -e 's/\015$//' README
 make
 
 %install
-rm -rf %{buildroot}
 install -d %{buildroot}%{_libdir}/ocaml/xml-light
 make install INSTALLDIR=%{buildroot}%{_libdir}/ocaml/xml-light
 
@@ -52,70 +65,4 @@ archive(byte) = "xml-light.cma"
 archive(native) = "xml-light.cmxa"
 EOF
 
-%clean
-rm -rf %{buildroot}
-
-%files
-%defattr(-,root,root)
-%doc README
-%dir %{_libdir}/ocaml/xml-light
-%{_libdir}/ocaml/xml-light/*.cmi
-%{_libdir}/ocaml/xml-light/*.cma
-%{_libdir}/ocaml/xml-light/META
-
-%files devel
-%defattr(-,root,root)
-%{_libdir}/ocaml/xml-light/*.a
-%{_libdir}/ocaml/xml-light/*.cmx
-%{_libdir}/ocaml/xml-light/*.cmxa
-%{_libdir}/ocaml/xml-light/*.mli
-
-
-%changelog
-* Wed May 09 2012 Crispin Boylan <crisb@mandriva.org> 2.2-18
-+ Revision: 797737
-- Rebuild
-
-* Sat Jun 27 2009 Guillaume Rousse <guillomovitch@mandriva.org> 2.2-17mdv2011.0
-+ Revision: 389827
-- rebuild
-
-* Wed Dec 24 2008 Guillaume Rousse <guillomovitch@mandriva.org> 2.2-16mdv2009.1
-+ Revision: 318329
-- move non-devel files in main package
-- site-lib hierarchy doesn't exist anymore
-
-* Thu Aug 14 2008 Guillaume Rousse <guillomovitch@mandriva.org> 2.2-15mdv2009.0
-+ Revision: 272173
-- fix META file
-
-* Wed Aug 13 2008 Guillaume Rousse <guillomovitch@mandriva.org> 2.2-14mdv2009.0
-+ Revision: 271624
-- add META file
-
-* Wed Jul 30 2008 Thierry Vignaud <tv@mandriva.org> 2.2-13mdv2009.0
-+ Revision: 254378
-- rebuild
-
-* Tue Mar 04 2008 Guillaume Rousse <guillomovitch@mandriva.org> 2.2-11mdv2008.1
-+ Revision: 178371
-- rebuild
-
-* Mon Feb 18 2008 Thierry Vignaud <tv@mandriva.org> 2.2-10mdv2008.1
-+ Revision: 171006
-- rebuild
-- fix "foobar is blabla" summary (=> "blabla") so that it looks nice in rpmdrake
-- kill re-definition of %%buildroot on Pixel's request
-
-  + Olivier Blin <blino@mandriva.org>
-    - restore BuildRoot
-
-* Sat Sep 01 2007 Guillaume Rousse <guillomovitch@mandriva.org> 2.2-9mdv2008.0
-+ Revision: 77552
-- don't ship documentation twice
-
-* Sat Sep 01 2007 Guillaume Rousse <guillomovitch@mandriva.org> 2.2-8mdv2008.0
-+ Revision: 77523
-- drop macro definition, now in rpm-mandriva-setup
-  ship .cmi file in non-devel subpackage
 

@@ -4,7 +4,7 @@
 Summary:	Minimal XML parser & printer for OCaml
 Name:		ocaml-xml-light
 Version:	2.2
-Release:	19
+Release:	20
 License:	LGPLv2.1+
 Group:		Development/Other
 Url:		http://tech.motion-twin.com/xmllight.html

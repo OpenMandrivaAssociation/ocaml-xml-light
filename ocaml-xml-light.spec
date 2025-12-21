@@ -10,6 +10,7 @@ Group:		Development/Other
 Url:		https://tech.motion-twin.com/xmllight.html
 Source0:	http://tech.motion-twin.com/zip/xml-light.tar.bz2
 Patch0:		%{name}-2.2-fix-build.patch
+BuildRequires:	make
 BuildRequires:	ocaml
 
 %description

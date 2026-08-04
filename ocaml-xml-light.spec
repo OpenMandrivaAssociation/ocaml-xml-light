@@ -4,7 +4,7 @@
 Summary:	Minimal XML parser & printer for OCaml
 Name:		ocaml-xml-light
 Version:	2.4
-Release:	2
+Release:	3
 License:	LGPLv2.1+
 Group:		Development/Other
 Url:		https://github.com/ncannasse/xml-light
@@ -46,8 +46,11 @@ using %{name}.
 %prep
 %autosetup -n xml-light-%{version}
 chmod 644 README *.mli || :
-# OCaml 5 removed String.lowercase
-sed -i 's/String\.lowercase\b/String.lowercase_ascii/g' xml_lexer.mll
+# OCaml 5 removed String.lowercase / String.uppercase
+find . -type f \( -name '*.ml' -o -name '*.mll' -o -name '*.mli' \) -print0 \
+	| xargs -0 sed -i \
+		-e 's/String\.lowercase\>/String.lowercase_ascii/g' \
+		-e 's/String\.uppercase\>/String.uppercase_ascii/g'
 
 %build
 make -j1 all

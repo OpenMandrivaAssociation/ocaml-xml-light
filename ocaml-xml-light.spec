@@ -48,8 +48,8 @@ using %{name}.
 chmod 644 README *.mli || :
 
 %build
-%make_build all
-%make_build opt
+make -j1 all
+make -j1 opt
 
 %install
 install -d %{buildroot}%{_libdir}/ocaml/xml-light

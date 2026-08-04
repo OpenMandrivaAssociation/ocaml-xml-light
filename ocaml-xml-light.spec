@@ -4,7 +4,7 @@
 Summary:	Minimal XML parser & printer for OCaml
 Name:		ocaml-xml-light
 Version:	2.4
-Release:	3
+Release:	4
 License:	LGPLv2.1+
 Group:		Development/Other
 Url:		https://github.com/ncannasse/xml-light
@@ -41,7 +41,6 @@ using %{name}.
 %{_libdir}/ocaml/xml-light/*.cmx
 %{_libdir}/ocaml/xml-light/*.cmxa
 %{_libdir}/ocaml/xml-light/*.mli
-%{_libdir}/ocaml/xml-light/*.cmxs
 
 %prep
 %autosetup -n xml-light-%{version}
@@ -58,7 +57,11 @@ make -j1 opt
 
 %install
 install -d %{buildroot}%{_libdir}/ocaml/xml-light
-%make_install INSTALLDIR=%{buildroot}%{_libdir}/ocaml/xml-light
+make installbyte installopt INSTALLDIR=%{buildroot}%{_libdir}/ocaml/xml-light
+# cmxs may not always be produced
+if [ -f xml-light.cmxs ]; then
+	cp -a xml-light.cmxs %{buildroot}%{_libdir}/ocaml/xml-light/
+fi
 
 cat > %{buildroot}%{_libdir}/ocaml/xml-light/META <<'METAEOF'
 version = "2.4"

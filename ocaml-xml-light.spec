@@ -8,7 +8,7 @@ Release:	1
 License:	LGPLv2.1+
 Group:		Development/Other
 Url:		https://github.com/ncannasse/xml-light
-Source0:	https://github.com/ncannasse/xml-light/archive/refs/tags/%{version}.tar.gz#/xml-light-%{version}.tar.gz
+Source0:	xml-light-%{version}.tar.gz
 BuildRequires:	make
 BuildRequires:	ocaml
 BuildRequires:	ocaml-compiler

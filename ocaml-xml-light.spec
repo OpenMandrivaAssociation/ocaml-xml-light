@@ -3,21 +3,21 @@
 
 Summary:	Minimal XML parser & printer for OCaml
 Name:		ocaml-xml-light
-Version:	2.2
-Release:	21
+Version:	2.4
+Release:	1
 License:	LGPLv2.1+
 Group:		Development/Other
-Url:		https://tech.motion-twin.com/xmllight.html
-Source0:	http://tech.motion-twin.com/zip/xml-light.tar.bz2
-Patch0:		%{name}-2.2-fix-build.patch
+Url:		https://github.com/ncannasse/xml-light
+Source0:	https://github.com/ncannasse/xml-light/archive/refs/tags/%{version}.tar.gz#/xml-light-%{version}.tar.gz
 BuildRequires:	make
 BuildRequires:	ocaml
+BuildRequires:	ocaml-compiler
 
 %description
-Xml-Light is a minimal XML parser & printer for OCaml. 
-It provide functions to parse an XML document into an OCaml data structure, 
-work with it, and print it back to an XML document. 
-It support also DTD parsing and checking, and is entirely written in OCaml, 
+Xml-Light is a minimal XML parser & printer for OCaml.
+It provide functions to parse an XML document into an OCaml data structure,
+work with it, and print it back to an XML document.
+It support also DTD parsing and checking, and is entirely written in OCaml,
 hence it does not require additional C library.
 
 %files
@@ -26,8 +26,6 @@ hence it does not require additional C library.
 %{_libdir}/ocaml/xml-light/*.cmi
 %{_libdir}/ocaml/xml-light/*.cma
 %{_libdir}/ocaml/xml-light/META
-
-#----------------------------------------------------------------------------
 
 %package devel
 Summary:	Development files for %{name}
@@ -43,27 +41,24 @@ using %{name}.
 %{_libdir}/ocaml/xml-light/*.cmx
 %{_libdir}/ocaml/xml-light/*.cmxa
 %{_libdir}/ocaml/xml-light/*.mli
-
-#----------------------------------------------------------------------------
+%{_libdir}/ocaml/xml-light/*.cmxs
 
 %prep
-%setup -q -n xml-light
-%patch -P0 -p1
-chmod 644 README *.mli
-perl -pi -e 's/\015$//' README
+%autosetup -n xml-light-%{version}
+chmod 644 README *.mli || :
 
 %build
-make
+%make_build all
+%make_build opt
 
 %install
 install -d %{buildroot}%{_libdir}/ocaml/xml-light
-make install INSTALLDIR=%{buildroot}%{_libdir}/ocaml/xml-light
+%make_install INSTALLDIR=%{buildroot}%{_libdir}/ocaml/xml-light
 
-cat > %{buildroot}%{_libdir}/ocaml/xml-light/META <<EOF
-version = "%{version}"
+cat > %{buildroot}%{_libdir}/ocaml/xml-light/META <<'METAEOF'
+version = "2.4"
 description = "Minimal XML parser & printer for OCaml"
 archive(byte) = "xml-light.cma"
 archive(native) = "xml-light.cmxa"
-EOF
-
-
+plugin(native) = "xml-light.cmxs"
+METAEOF
